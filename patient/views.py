@@ -6,11 +6,12 @@ from .serializers import PatientVisitsSerializer, PatientPrescriptionSerializer,
     PrescriptionsSerializer, VisitSerializer, PrescriptionSerializer
 from .models import Patient, PatientPrescription, PatientVisit
 from hospital.serializers import PatientSerializer
+from .permissions import PatientPermission
 
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, PatientPermission]
 
     def get_serializer_class(self):
         if self.action == 'get_patient_visits':

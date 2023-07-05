@@ -6,13 +6,14 @@ from rest_framework.decorators import action
 from patient.models import PatientPrescription
 from .serializers import DoctorSerializer, DoctorPrescriptionsSerializer
 from .models import Doctor
+from .permissions import DoctorPermission
 
 
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
     authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, DoctorPermission]
 
     def get_serializer_class(self):
         if self.action == 'get_doctor_prescriptions':
