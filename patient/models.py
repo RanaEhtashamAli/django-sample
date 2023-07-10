@@ -5,7 +5,7 @@ from doctor.models import Doctor
 class Patient(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    address = models.TextField()
+    address = models.TextField(null=True, blank=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
